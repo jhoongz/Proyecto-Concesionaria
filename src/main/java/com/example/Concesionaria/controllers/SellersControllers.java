@@ -5,6 +5,7 @@ import com.example.Concesionaria.models.Seller;
 import com.example.Concesionaria.services.SellerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,17 +22,18 @@ public class SellersControllers {
     private SellerService sellerService;
 
     @PostMapping("/sellers")
-    public void addSeller(@Valid @RequestBody NewSellerRequest request) {
-        sellerService.addNewSeller(request);
+    public ResponseEntity<Seller> addSeller(@Valid @RequestBody NewSellerRequest request){
+        Seller newSeller = sellerService.addNewSeller(request);
+        return new ResponseEntity<>(newSeller, HttpStatus.CREATED);
     }
 
     @GetMapping("/sellers")
     public ResponseEntity<List<Seller>> getAllSellers() {
-        return new ResponseEntity<>(sellerService.getAllSellers(), HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(sellerService.getAllSellers(), HttpStatus.OK);
     }
 
     @GetMapping("/sellers/{id}")
     public ResponseEntity<Optional<Seller>> getSellersById(@PathVariable Long id) {
-        return new ResponseEntity<>(sellerService.getSellerById(id), HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(sellerService.getSellerById(id), HttpStatus.OK);
     }
 }

@@ -16,7 +16,7 @@ public class SellerService {
     @Autowired
     private SellerRepository sellerRepository;
 
-    public void addNewSeller(NewSellerRequest request) {
+    public Seller addNewSeller(NewSellerRequest request) {
 
         Seller newSeller = Seller.builder()
                 .firstName(request.getFirstName())
@@ -27,6 +27,7 @@ public class SellerService {
         newSeller = sellerRepository.save(newSeller);
         System.out.println("New Seller: " + newSeller.getId());
 
+        return newSeller;
     }
 
     public List<Seller> getAllSellers() {
@@ -36,19 +37,19 @@ public class SellerService {
     public Optional<Seller> getSellerById(Long id) {
         return sellerRepository.findById(id);
     }
-
+/*
     public List<Seller> getSellersById(Long id) {
         List<Seller> sellerList = List.of(
                 Seller.builder()
                         .firstName("Juan")
                         .lastName("Gomez")
-                        .email("juan.gomez@nuevo.com")
+                        .email("juan.gomez@mail.com")
                         .phone(1123659865L)
                         .build(),
                 Seller.builder()
                         .firstName("Ana")
                         .lastName("Lopez")
-                        .email("ana.lopez@ejemplo.com")
+                        .email("ana.lopez@mail.com")
                         .phone(1167894321L)
                         .build()
         );
@@ -56,12 +57,5 @@ public class SellerService {
         System.out.println("All Sellers has been save: " + sellerList.size());
         return sellerList;
     }
-
-    @PostConstruct
-    public void initializeSellers() {
-        if (sellerRepository.count() == 0) {
-            getSellersById(1L);
-            System.out.println("Default sellers inserted automatically.");
-        }
-    }
+ */
 }

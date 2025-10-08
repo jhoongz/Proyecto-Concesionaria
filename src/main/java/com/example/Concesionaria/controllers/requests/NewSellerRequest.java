@@ -13,17 +13,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class NewSellerRequest {
 
-    @NotBlank(message = "El nombre no puede estar vacío")
+    @NotNull
+    @NotBlank(message = "El nombre no puede estar vacio")
     private String firstName;
 
-    @NotBlank(message = "El apellido no puede estar vacío")
+    @NotNull
+    @NotBlank(message = "El apellido no puede estar vacio")
     private String lastName;
 
-    @Email(message = "El email debe tener un formato válido")
+    @NotNull
     @NotBlank(message = "El email es obligatorio")
+    @Email(message = "El email debe tener un formato valido")
     private String email;
 
-    @NotNull(message = "El teléfono es obligatorio")
-    @Min(value = 1000000000, message = "El teléfono debe tener al menos 10 dígitos")
+    @NotNull(message = "El telefono es obligatorio")
+    @Min(value = 1000000000, message = "El telefono debe tener al menos 10 digitos")
     private Long phone;
 }
