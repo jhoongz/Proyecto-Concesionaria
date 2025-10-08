@@ -1,2 +1,2 @@
-# Proyecto-Concesionaria
-Proyecto en Spring Boot de gestión de concesionaria.
+# Concesionaria
+Proyecto en Spring Boot para la gestión de vendedores, autos y clientes.
