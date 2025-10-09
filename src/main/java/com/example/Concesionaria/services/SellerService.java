@@ -2,8 +2,8 @@ package com.example.Concesionaria.services;
 
 import com.example.Concesionaria.SellerRepository;
 import com.example.Concesionaria.controllers.requests.NewSellerRequest;
+import com.example.Concesionaria.controllers.requests.SellerRequest;
 import com.example.Concesionaria.models.Seller;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,25 +37,13 @@ public class SellerService {
     public Optional<Seller> getSellerById(Long id) {
         return sellerRepository.findById(id);
     }
-/*
-    public List<Seller> getSellersById(Long id) {
-        List<Seller> sellerList = List.of(
-                Seller.builder()
-                        .firstName("Juan")
-                        .lastName("Gomez")
-                        .email("juan.gomez@mail.com")
-                        .phone(1123659865L)
-                        .build(),
-                Seller.builder()
-                        .firstName("Ana")
-                        .lastName("Lopez")
-                        .email("ana.lopez@mail.com")
-                        .phone(1167894321L)
-                        .build()
-        );
-        sellerRepository.saveAll(sellerList);
-        System.out.println("All Sellers has been save: " + sellerList.size());
-        return sellerList;
+
+    public Seller updateSeller(Long id, SellerRequest request) {
+        Seller updateSeller = sellerRepository.findById(id).get();
+        updateSeller.setFirstName(request.getFirstName());
+        updateSeller.setLastName(request.getLastName());
+        updateSeller.setEmail(request.getEmail());
+        updateSeller.setPhone(request.getPhone());
+        return sellerRepository.save(updateSeller);
     }
- */
 }

@@ -1,6 +1,7 @@
 package com.example.Concesionaria.controllers;
 
 import com.example.Concesionaria.controllers.requests.NewSellerRequest;
+import com.example.Concesionaria.controllers.requests.SellerRequest;
 import com.example.Concesionaria.models.Seller;
 import com.example.Concesionaria.services.SellerService;
 import jakarta.validation.Valid;
@@ -36,4 +37,11 @@ public class SellersControllers {
     public ResponseEntity<Optional<Seller>> getSellersById(@PathVariable Long id) {
         return new ResponseEntity<>(sellerService.getSellerById(id), HttpStatus.OK);
     }
+
+    @PutMapping("/sellers/{id}")
+    public ResponseEntity<Seller> updateSeller(@PathVariable Long id, @RequestBody SellerRequest request) {
+        return new ResponseEntity<>(sellerService.updateSeller(id, request), HttpStatus.OK);
+    }
+
+
 }
