@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class SellerRequest {
+public class UpdateSellerRequest {
     @Id
     private Long id;
 

@@ -2,7 +2,7 @@ package com.example.Concesionaria.services;
 
 import com.example.Concesionaria.SellerRepository;
 import com.example.Concesionaria.controllers.requests.NewSellerRequest;
-import com.example.Concesionaria.controllers.requests.SellerRequest;
+import com.example.Concesionaria.controllers.requests.UpdateSellerRequest;
 import com.example.Concesionaria.models.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,12 +38,29 @@ public class SellerService {
         return sellerRepository.findById(id);
     }
 
-    public Seller updateSeller(Long id, SellerRequest request) {
+    public Seller updateSellerById(Long id, UpdateSellerRequest request) {
         Seller updateSeller = sellerRepository.findById(id).get();
         updateSeller.setFirstName(request.getFirstName());
         updateSeller.setLastName(request.getLastName());
         updateSeller.setEmail(request.getEmail());
         updateSeller.setPhone(request.getPhone());
         return sellerRepository.save(updateSeller);
+    }
+
+    public Seller fixSellerById(Long id, UpdateSellerRequest request) {
+        Seller fixSeller = sellerRepository.findById(id).get();
+        if (request.getFirstName() != null) {
+            fixSeller.setFirstName(request.getFirstName());
+        }
+        if (request.getLastName() != null) {
+            fixSeller.setLastName(request.getLastName());
+        }
+        if (request.getEmail() != null) {
+            fixSeller.setEmail(request.getEmail());
+        }
+        if (request.getPhone() != null) {
+            fixSeller.setPhone(request.getPhone());
+        }
+        return sellerRepository.save(fixSeller);
     }
 }
