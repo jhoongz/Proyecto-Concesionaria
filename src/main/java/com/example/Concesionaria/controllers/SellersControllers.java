@@ -1,12 +1,12 @@
 package com.example.Concesionaria.controllers;
 
 import com.example.Concesionaria.controllers.requests.NewSellerRequest;
+import com.example.Concesionaria.controllers.requests.UpdateSellerRequest;
 import com.example.Concesionaria.models.Seller;
 import com.example.Concesionaria.services.SellerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +35,25 @@ public class SellersControllers {
     @GetMapping("/sellers/{id}")
     public ResponseEntity<Optional<Seller>> getSellersById(@PathVariable Long id) {
         return new ResponseEntity<>(sellerService.getSellerById(id), HttpStatus.OK);
+    }
+
+    @PutMapping("/sellers/{id}")
+    public ResponseEntity<Seller> updateSellerById(@PathVariable Long id, @RequestBody UpdateSellerRequest request) {
+        return new ResponseEntity<>(sellerService.updateSellerById(id, request), HttpStatus.OK);
+    }
+
+    @PatchMapping("/sellers/{id}")
+    public ResponseEntity<Seller> fixSellerById(@PathVariable Long id, @RequestBody UpdateSellerRequest request) {
+        return new ResponseEntity<>(sellerService.fixSellerById(id, request), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/sellers")
+    public ResponseEntity<List<Seller>> deleteAllSellers(){
+        return new ResponseEntity<>(sellerService.deleteAllSellers(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/sellers/{id}")
+    public ResponseEntity<Optional<Seller>> deleteSellerById(@PathVariable Long id){
+        return new ResponseEntity<>(sellerService.deleteSellerById(id), HttpStatus.OK);
     }
 }
