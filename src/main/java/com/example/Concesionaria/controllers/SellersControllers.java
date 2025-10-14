@@ -14,45 +14,45 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/employees")
+@RequestMapping("/employees/sellers")
 
 public class SellersControllers {
 
     @Autowired
     private SellerService sellerService;
 
-    @PostMapping("/sellers")
+    @PostMapping()
     public ResponseEntity<Seller> addSeller(@Valid @RequestBody NewSellerRequest request){
         Seller newSeller = sellerService.addNewSeller(request);
         return new ResponseEntity<>(newSeller, HttpStatus.CREATED);
     }
 
-    @GetMapping("/sellers")
+    @GetMapping()
     public ResponseEntity<List<Seller>> getAllSellers() {
         return new ResponseEntity<>(sellerService.getAllSellers(), HttpStatus.OK);
     }
 
-    @GetMapping("/sellers/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Seller>> getSellersById(@PathVariable Long id) {
         return new ResponseEntity<>(sellerService.getSellerById(id), HttpStatus.OK);
     }
 
-    @PutMapping("/sellers/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Seller> updateSellerById(@PathVariable Long id, @RequestBody UpdateSellerRequest request) {
-        return new ResponseEntity<>(sellerService.updateSellerById(id, request), HttpStatus.OK);
+        return new ResponseEntity<>(sellerService.updateSellerById(id, request), HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("/sellers/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<Seller> fixSellerById(@PathVariable Long id, @RequestBody UpdateSellerRequest request) {
-        return new ResponseEntity<>(sellerService.fixSellerById(id, request), HttpStatus.OK);
+        return new ResponseEntity<>(sellerService.fixSellerById(id, request), HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/sellers")
+    @DeleteMapping()
     public ResponseEntity<List<Seller>> deleteAllSellers(){
         return new ResponseEntity<>(sellerService.deleteAllSellers(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/sellers/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Optional<Seller>> deleteSellerById(@PathVariable Long id){
         return new ResponseEntity<>(sellerService.deleteSellerById(id), HttpStatus.OK);
     }

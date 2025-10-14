@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface SellerRepository extends JpaRepository<Seller,Long> {
-    List<Seller> Id(Long id);
 }
+
+// JPA Generete Quarrie
