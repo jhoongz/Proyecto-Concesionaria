@@ -63,4 +63,14 @@ public class SellerService {
         }
         return sellerRepository.save(fixSeller);
     }
+
+    public List<Seller> deleteAllSellers() {
+        sellerRepository.deleteAll();
+        return sellerRepository.findAll();
+    }
+
+    public Optional<Seller> deleteSellerById(Long id) {
+        sellerRepository.deleteById(id);
+        return sellerRepository.findById(id);
+    }
 }
