@@ -9,5 +9,3 @@ import java.util.List;
 @Repository
 public interface SellerRepository extends JpaRepository<Seller,Long> {
 }
-
-// JPA Generete Quarrie
