@@ -1,6 +1,7 @@
 package com.example.Concesionaria.services;
 
 import com.example.Concesionaria.SellerRepository;
+import com.example.Concesionaria.controllers.requests.FixSellerRequest;
 import com.example.Concesionaria.controllers.requests.NewSellerRequest;
 import com.example.Concesionaria.controllers.requests.UpdateSellerRequest;
 import com.example.Concesionaria.models.Seller;
@@ -47,7 +48,7 @@ public class SellerService {
         return sellerRepository.save(updateSeller);
     }
 
-    public Seller fixSellerById(Long id, UpdateSellerRequest request) {
+    public Seller fixSellerById(Long id, FixSellerRequest request) {
         Seller fixSeller = sellerRepository.findById(id).get();
         if (request.getFirstName() != null) {
             fixSeller.setFirstName(request.getFirstName());

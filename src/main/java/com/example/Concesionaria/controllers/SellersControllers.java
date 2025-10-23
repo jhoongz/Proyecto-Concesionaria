@@ -1,8 +1,11 @@
 package com.example.Concesionaria.controllers;
 
+import com.example.Concesionaria.clients.SellerApiClient;
+import com.example.Concesionaria.controllers.requests.FixSellerRequest;
 import com.example.Concesionaria.controllers.requests.NewSellerRequest;
 import com.example.Concesionaria.controllers.requests.UpdateSellerRequest;
 import com.example.Concesionaria.models.Seller;
+import com.example.Concesionaria.services.SellerApiService;
 import com.example.Concesionaria.services.SellerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+// ----------------------------------------
+// ------------- Historia 1 ---------------
+// ----------------------------------------
+
 @RestController
 @RequestMapping("/employees/sellers")
 
@@ -20,6 +27,15 @@ public class SellersControllers {
 
     @Autowired
     private SellerService sellerService;
+    private SellerApiService sellerApiService;
+
+    public SellersControllers(SellerApiService sellerApiService) {
+        this.sellerApiService = sellerApiService;
+    }
+
+    // ----------------------------------------
+    // ------------- Historia 2 ---------------
+    // ----------------------------------------
 
     @PostMapping()
     public ResponseEntity<Seller> addSeller(@Valid @RequestBody NewSellerRequest request){
@@ -43,7 +59,7 @@ public class SellersControllers {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Seller> fixSellerById(@PathVariable Long id, @RequestBody UpdateSellerRequest request) {
+    public ResponseEntity<Seller> fixSellerById(@PathVariable Long id, @RequestBody FixSellerRequest request) {
         return new ResponseEntity<>(sellerService.fixSellerById(id, request), HttpStatus.NO_CONTENT);
     }
 
@@ -56,4 +72,15 @@ public class SellersControllers {
     public ResponseEntity<Optional<Seller>> deleteSellerById(@PathVariable Long id){
         return new ResponseEntity<>(sellerService.deleteSellerById(id), HttpStatus.OK);
     }
+
+    // ----------------------------------------
+    // ------------- Historia 3 ---------------
+    // ----------------------------------------
+
+    @PostMapping("/import/{value}")
+    public ResponseEntity<List<Seller>> importSellers(@PathVariable Long value){
+        List<Seller> imported = sellerApiService.importSellers(value);
+        return new ResponseEntity<>(imported, HttpStatus.CREATED);
+    }
 }
+
