@@ -1,11 +1,10 @@
 package com.example.Concesionaria.controllers;
 
-import com.example.Concesionaria.clients.SellerApiClient;
 import com.example.Concesionaria.controllers.requests.FixSellerRequest;
 import com.example.Concesionaria.controllers.requests.NewSellerRequest;
 import com.example.Concesionaria.controllers.requests.UpdateSellerRequest;
 import com.example.Concesionaria.models.Seller;
-import com.example.Concesionaria.services.SellerApiService;
+import com.example.Concesionaria.services.RandomApiService;
 import com.example.Concesionaria.services.SellerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +26,10 @@ public class SellersControllers {
 
     @Autowired
     private SellerService sellerService;
-    private SellerApiService sellerApiService;
+    private RandomApiService randomApiService;
 
-    public SellersControllers(SellerApiService sellerApiService) {
-        this.sellerApiService = sellerApiService;
+    public SellersControllers(RandomApiService randomApiService) {
+        this.randomApiService = randomApiService;
     }
 
     // ----------------------------------------
@@ -79,7 +78,7 @@ public class SellersControllers {
 
     @PostMapping("/import/{value}")
     public ResponseEntity<List<Seller>> importSellers(@PathVariable Long value){
-        List<Seller> imported = sellerApiService.importSellers(value);
+        List<Seller> imported = randomApiService.importSellers(value);
         return new ResponseEntity<>(imported, HttpStatus.CREATED);
     }
 }
