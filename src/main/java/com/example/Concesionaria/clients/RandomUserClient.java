@@ -43,32 +43,3 @@ public class RandomUserClient {
         return response;
     }
 }
-
-
-/*
-@Component
-public class RandomUserClient {
-
-    private final WebClient webClient;
-
-    // Inyectamos el valor en el constructor correctamente
-    public RandomUserClient(WebClient.Builder builder,
-                            @Value("${baseUrlRandomUser}") String randomUserUrl) {
-        this.webClient = builder
-                .baseUrl(randomUserUrl)
-                .build();
-    }
-
-    public GetRandomUserResponse getRandomUsersByQuantity(Long value) {
-        return webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/api") // 👈 importante, el endpoint correcto de randomuser.me
-                        .queryParam("results", value)
-                        .queryParam("nat", "es")
-                        .build())
-                .retrieve()
-                .bodyToMono(GetRandomUserResponse.class)
-                .block();
-    }
-}
-*/
