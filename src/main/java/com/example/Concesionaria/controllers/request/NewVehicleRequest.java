@@ -1,6 +1,8 @@
 package com.example.Concesionaria.controllers.request;
 
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -26,10 +28,11 @@ public class NewVehicleRequest {
     private String colour;
 
     @NotNull
-    @NotBlank
+    @Min(value = 0, message = "El precio no puede ser negativo")
     private Double price;
 
     @NotNull
-    @NotBlank
+    @Min(value = 1980, message = "El año no puede ser menor a 1980")
+    @Max(value = 2030, message = "El año no puede ser mayor a 2030")
     private Integer yearV;
 }
