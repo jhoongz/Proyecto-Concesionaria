@@ -1,8 +1,8 @@
 package com.example.Concesionaria.controllers;
 
-import com.example.Concesionaria.controllers.request.NewVehicleRequest;
-import com.example.Concesionaria.controllers.request.PatchVehicleRequest;
-import com.example.Concesionaria.controllers.request.UpdateVehicleRequest;
+import com.example.Concesionaria.controllers.requests.NewVehicleRequest;
+import com.example.Concesionaria.controllers.requests.PatchVehicleRequest;
+import com.example.Concesionaria.controllers.requests.UpdateVehicleRequest;
 import com.example.Concesionaria.models.Vehicle;
 import com.example.Concesionaria.services.VehiclesService;
 import jakarta.validation.Valid;
