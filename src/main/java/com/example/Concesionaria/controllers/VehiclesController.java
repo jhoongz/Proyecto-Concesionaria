@@ -21,7 +21,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/vehicles")
 
-public class VehiclesControllers {
+public class VehiclesController {
 
     @Autowired
     private VehiclesService vehiclesService;
@@ -32,7 +32,7 @@ public class VehiclesControllers {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Vehicle>> getVehicleById(@PathVariable Long id) {
+    public ResponseEntity<Vehicle> getVehicleById(@PathVariable Long id) {
         return new ResponseEntity<>(vehiclesService.getVehicleById(id), HttpStatus.OK);
     }
 

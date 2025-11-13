@@ -21,7 +21,8 @@ public class VehiclesService {
         return vehicleRepository.findAll();
     }
 
-    public Optional<Vehicle> getVehicleById(Long id) { return vehicleRepository.findById(id);
+    public Vehicle getVehicleById(Long id) {
+        return vehicleRepository.findById(id).orElse(null);
     }
 
     public Vehicle addNewVehicle(NewVehicleRequest request) {

@@ -26,8 +26,8 @@ public class SellerService {
         return sellerRepository.findAll();
     }
 
-    public Optional<Seller> getSellerById(Long id) {
-        return sellerRepository.findById(id);
+    public Seller getSellerById(Long id) {
+        return sellerRepository.findById(id).orElse(null);
     }
 
     public Seller addNewSeller(NewSellerRequest request) {
