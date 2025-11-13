@@ -36,7 +36,7 @@ public class SellersControllers {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Seller>> getSellersById(@PathVariable Long id) {
+    public ResponseEntity<Seller> getSellersById(@PathVariable Long id) {
         return new ResponseEntity<>(sellerService.getSellerById(id), HttpStatus.OK);
     }
 
