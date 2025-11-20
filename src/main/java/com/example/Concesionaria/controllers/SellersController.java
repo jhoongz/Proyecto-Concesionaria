@@ -21,7 +21,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/employees/sellers")
 
-public class SellersControllers {
+public class SellersController {
 
     @Autowired
     private SellerService sellerService;
