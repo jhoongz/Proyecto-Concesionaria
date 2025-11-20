@@ -10,3 +10,4 @@ VALUES ('Ford','Focus','White','35000','2018');
 
 INSERT INTO vehicle (brand, model, colour, price, yearV)
 VALUES ('Fiat','Cronos','Gray','40000','2022');
+
