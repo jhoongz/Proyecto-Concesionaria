@@ -1,4 +1,4 @@
-package com.example.Concesionaria.controllers.requests;
+package com.example.Concesionaria.dtos.requests;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;

@@ -24,5 +24,5 @@ public class Seller {
     private Long phone;
 
     @OneToMany(mappedBy = "seller", fetch =  FetchType.LAZY)
-    private List<Operation> operations;
+    private List<Operation> operations; //OperationResponse || toListOperationResponse
 }

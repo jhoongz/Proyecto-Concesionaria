@@ -1,4 +1,4 @@
-package com.example.Concesionaria.controllers.requests;
+package com.example.Concesionaria.dtos.requests;
 
 import com.example.Concesionaria.models.Seller;
 import com.example.Concesionaria.models.Vehicle;

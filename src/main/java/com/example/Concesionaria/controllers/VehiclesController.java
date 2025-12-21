@@ -1,10 +1,15 @@
 package com.example.Concesionaria.controllers;
 
-import com.example.Concesionaria.controllers.requests.NewVehicleRequest;
-import com.example.Concesionaria.controllers.requests.PatchVehicleRequest;
-import com.example.Concesionaria.controllers.requests.UpdateVehicleRequest;
+import com.example.Concesionaria.dtos.requests.NewVehicleRequest;
+import com.example.Concesionaria.dtos.requests.PatchVehicleRequest;
+import com.example.Concesionaria.dtos.requests.UpdateVehicleRequest;
+import com.example.Concesionaria.dtos.responses.GetVehicleByIdResponse;
+import com.example.Concesionaria.dtos.responses.PatchVehicleByIdResponse;
+import com.example.Concesionaria.dtos.responses.SaveVehicleResponse;
+import com.example.Concesionaria.dtos.responses.UpdateVehicleByIdResponse;
+import com.example.Concesionaria.mappers.VehicleMapper;
 import com.example.Concesionaria.models.Vehicle;
-import com.example.Concesionaria.services.VehiclesService;
+import com.example.Concesionaria.services.VehicleService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,41 +29,46 @@ import java.util.Optional;
 public class VehiclesController {
 
     @Autowired
-    private VehiclesService vehiclesService;
+    private VehicleService vehicleService;
+
+    @Autowired
+    private VehicleMapper vehicleMapper;
 
     @GetMapping()
     public ResponseEntity<List<Vehicle>> getAllVehicles() {
-        return new ResponseEntity<>(vehiclesService.getAllVehicles() ,HttpStatus.OK);
+        return new ResponseEntity<>(vehicleService.getAllVehicles() ,HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Vehicle> getVehicleById(@PathVariable Long id) {
-        return new ResponseEntity<>(vehiclesService.getVehicleById(id), HttpStatus.OK);
+    public ResponseEntity<GetVehicleByIdResponse> getVehicleById(@PathVariable Long id) {
+        return new ResponseEntity<>(vehicleMapper.toGetSellerByIdResponse(vehicleService.getVehicleById(id)), HttpStatus.OK);
     }
 
     @PostMapping()
-    public ResponseEntity<Vehicle> addVehicle(@Valid @RequestBody NewVehicleRequest request) {
-        Vehicle newVehicle = vehiclesService.addNewVehicle(request);
-        return new ResponseEntity<>(newVehicle, HttpStatus.CREATED);
+    public ResponseEntity<SaveVehicleResponse> addVehicle(@Valid @RequestBody NewVehicleRequest request) {
+        Vehicle newVehicle = vehicleService.addNewVehicle(request);
+        return new ResponseEntity<>(vehicleMapper.toSaveVehicleResponse(newVehicle), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Vehicle> updateVehicleById(@PathVariable Long id, @RequestBody UpdateVehicleRequest request) {
-        return new ResponseEntity<>(vehiclesService.updateVehicleById(id, request),HttpStatus.NO_CONTENT);
+    public ResponseEntity<UpdateVehicleByIdResponse> updateVehicleById(@PathVariable Long id, @RequestBody UpdateVehicleRequest request) {
+        Vehicle updateVehicle = vehicleService.updateVehicleById(id, request);
+        return new ResponseEntity<>(vehicleMapper.toUpdateSellerByIdResponse(updateVehicle),HttpStatus.OK);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Vehicle> patchVehicleById(@PathVariable Long id, @RequestBody PatchVehicleRequest request) {
-        return new ResponseEntity<>(vehiclesService.fixVehicleById(id, request),HttpStatus.OK);
+    public ResponseEntity<PatchVehicleByIdResponse> patchVehicleById(@PathVariable Long id, @RequestBody PatchVehicleRequest request) {
+        Vehicle patchVehicle = vehicleService.fixVehicleById(id, request);
+        return new ResponseEntity<>(vehicleMapper.toPatchVehicleByIdResponse(patchVehicle),HttpStatus.OK);
     }
 
     @DeleteMapping
     public ResponseEntity<List<Vehicle>> deleteAllVehicles() {
-     return new ResponseEntity<>(vehiclesService.deleteAllVehicles(), HttpStatus.OK);
+     return new ResponseEntity<>(vehicleService.deleteAllVehicles(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Optional<Vehicle>> deleteVehicleById(@PathVariable Long id) {
-        return new ResponseEntity<>(vehiclesService.deleteVehicleById(id), HttpStatus.OK);
+        return new ResponseEntity<>(vehicleService.deleteVehicleById(id), HttpStatus.OK);
     }
 }

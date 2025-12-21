@@ -5,7 +5,7 @@ package com.example.Concesionaria.controllers;
 // ----------------------------------------
 
 
-import com.example.Concesionaria.controllers.requests.NewOperationRequest;
+import com.example.Concesionaria.dtos.requests.NewOperationRequest;
 import com.example.Concesionaria.models.Operation;
 import com.example.Concesionaria.services.OperationService;
 import jakarta.validation.Valid;

@@ -1,26 +1,24 @@
-package com.example.Concesionaria.controllers.requests;
+package com.example.Concesionaria.dtos.responses;
 
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
+import com.example.Concesionaria.models.Operation;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class PatchSellerRequest {
-    @Id
+@Builder
+public class SaveSellerResponse {
     private Long id;
 
     private String firstName;
     private String lastName;
-
-    @Email
     private String email;
-
-    @Min(value = 1000000000)
     private Long phone;
+
+    private List<Operation> operations;
 }

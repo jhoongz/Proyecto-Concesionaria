@@ -1,8 +1,10 @@
 package com.example.Concesionaria.controllers;
 
-import com.example.Concesionaria.controllers.requests.PatchSellerRequest;
-import com.example.Concesionaria.controllers.requests.NewSellerRequest;
-import com.example.Concesionaria.controllers.requests.UpdateSellerRequest;
+import com.example.Concesionaria.dtos.requests.PatchSellerRequest;
+import com.example.Concesionaria.dtos.requests.NewSellerRequest;
+import com.example.Concesionaria.dtos.requests.UpdateSellerRequest;
+import com.example.Concesionaria.dtos.responses.*;
+import com.example.Concesionaria.mappers.SellerMapper;
 import com.example.Concesionaria.models.Seller;
 import com.example.Concesionaria.services.SellerService;
 import jakarta.validation.Valid;
@@ -26,6 +28,9 @@ public class SellersController {
     @Autowired
     private SellerService sellerService;
 
+    @Autowired
+    private SellerMapper sellerMapper;
+
     // ----------------------------------------
     // ------------- Historia 2 ---------------
     // ----------------------------------------
@@ -36,24 +41,26 @@ public class SellersController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Seller> getSellersById(@PathVariable Long id) {
-        return new ResponseEntity<>(sellerService.getSellerById(id), HttpStatus.OK);
+    public ResponseEntity<GetSellerByIdResponse> getSellersById(@PathVariable Long id) {
+        return new ResponseEntity<>(sellerMapper.toGetSellerByIdResponse(sellerService.getSellerById(id)), HttpStatus.OK);
     }
 
     @PostMapping()
-    public ResponseEntity<Seller> addSeller(@Valid @RequestBody NewSellerRequest request){
+    public ResponseEntity<SaveSellerResponse> addSeller(@Valid @RequestBody NewSellerRequest request){
         Seller newSeller = sellerService.addNewSeller(request);
-        return new ResponseEntity<>(newSeller, HttpStatus.CREATED);
+        return new ResponseEntity<>(sellerMapper.toSaveSellerResponse(newSeller), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Seller> updateSellerById(@PathVariable Long id, @RequestBody UpdateSellerRequest request) {
-        return new ResponseEntity<>(sellerService.updateSellerById(id, request), HttpStatus.NO_CONTENT);
+    public ResponseEntity<UpdateSellerByIdResponse> updateSellerById(@PathVariable Long id, @RequestBody UpdateSellerRequest request) {
+        Seller updateSeller = sellerService.updateSellerById(id, request);
+        return new ResponseEntity<>(sellerMapper.toUpdateSellerByIdResponse(updateSeller), HttpStatus.OK);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Seller> patchSellerById(@PathVariable Long id, @RequestBody PatchSellerRequest request) {
-        return new ResponseEntity<>(sellerService.patchSellerById(id, request), HttpStatus.NO_CONTENT);
+    public ResponseEntity<PatchSellerByIdResponse> patchSellerById(@PathVariable Long id, @RequestBody PatchSellerRequest request) {
+        Seller patchSeller = sellerService.patchSellerById(id, request);
+        return new ResponseEntity<>(sellerMapper.toPatchSellerByIdResponse(patchSeller), HttpStatus.OK);
     }
 
     @DeleteMapping()
@@ -71,8 +78,8 @@ public class SellersController {
     // ----------------------------------------
 
     @PostMapping("/import/{value}")
-    public ResponseEntity<List<Seller>> importSellers(@PathVariable Long value){
+    public ResponseEntity<SellersResponse> importSellers(@PathVariable Long value){
         List<Seller> imported = sellerService.importSellers(value);
-        return new ResponseEntity<>(imported, HttpStatus.CREATED);
+        return new ResponseEntity<>(sellerMapper.toImportSellerResponse(imported), HttpStatus.CREATED);
     }
 }

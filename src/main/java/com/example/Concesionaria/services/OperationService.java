@@ -1,7 +1,8 @@
 package com.example.Concesionaria.services;
 
 import com.example.Concesionaria.OperationRepository;
-import com.example.Concesionaria.controllers.requests.NewOperationRequest;
+import com.example.Concesionaria.dtos.requests.NewOperationRequest;
+import com.example.Concesionaria.mappers.OperationMapper;
 import com.example.Concesionaria.models.Operation;
 import com.example.Concesionaria.models.Seller;
 import com.example.Concesionaria.models.Vehicle;
@@ -14,17 +15,18 @@ import java.util.UUID;
 @Service
 public class OperationService {
 
-    private final OperationRepository operationRepository;
+    @Autowired
+    private OperationRepository operationRepository;
+
+    @Autowired
+    private OperationMapper operationMapper;
 
     @Autowired
     private SellerService sellerService;
 
     @Autowired
-    private VehiclesService vehiclesService;
+    private VehicleService vehicleService;
 
-    public OperationService(OperationRepository operationRepository) {
-        this.operationRepository = operationRepository;
-    }
 
     public List<Operation> getAllOperations() {
         return operationRepository.findAll();
@@ -37,7 +39,7 @@ public class OperationService {
     public Operation newOperationRegister(NewOperationRequest request) {
 
         Seller seller = sellerService.getSellerById(request.getSeller().getId());
-        Vehicle vehicle = vehiclesService.getVehicleById(request.getVehicle().getId());
+        Vehicle vehicle = vehicleService.getVehicleById(request.getVehicle().getId());
 
         Operation sale = new Operation();
         sale.setSeller(seller);
