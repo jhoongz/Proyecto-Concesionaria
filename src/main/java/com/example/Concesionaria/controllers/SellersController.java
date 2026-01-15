@@ -41,8 +41,8 @@ public class SellersController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetSellerByIdResponse> getSellersById(@PathVariable Long id) {
-        return new ResponseEntity<>(sellerMapper.toGetSellerByIdResponse(sellerService.getSellerById(id)), HttpStatus.OK);
+    public ResponseEntity<SellerResponse> getSellersById(@PathVariable Long id) {
+        return new ResponseEntity<>(sellerMapper.toSellerResponse(sellerService.getSellerById(id)), HttpStatus.OK);
     }
 
     @PostMapping()

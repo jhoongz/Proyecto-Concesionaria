@@ -1,6 +1,6 @@
 package com.example.Concesionaria.services;
 
-import com.example.Concesionaria.VehicleRepository;
+import com.example.Concesionaria.repositories.VehicleRepository;
 import com.example.Concesionaria.dtos.requests.NewVehicleRequest;
 import com.example.Concesionaria.dtos.requests.PatchVehicleRequest;
 import com.example.Concesionaria.dtos.requests.UpdateVehicleRequest;

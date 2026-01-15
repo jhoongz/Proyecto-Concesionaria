@@ -1,14 +1,12 @@
 package com.example.Concesionaria.mappers;
 
-import com.example.Concesionaria.VehicleRepository;
+import com.example.Concesionaria.repositories.VehicleRepository;
 import com.example.Concesionaria.dtos.requests.NewVehicleRequest;
 import com.example.Concesionaria.dtos.requests.PatchVehicleRequest;
 import com.example.Concesionaria.dtos.requests.UpdateVehicleRequest;
 import com.example.Concesionaria.dtos.responses.*;
 import com.example.Concesionaria.models.Vehicle;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class VehicleMapper {
@@ -41,8 +39,18 @@ public class VehicleMapper {
                 .build();
     }
 
-    public GetVehicleByIdResponse toGetSellerByIdResponse(Vehicle vehicle) {
-        return GetVehicleByIdResponse.builder()
+    public VehicleResponse toGetVehicleByIdResponse(Vehicle vehicle) {
+        return VehicleResponse.builder()
+                .brand(vehicle.getBrand())
+                .model(vehicle.getModel())
+                .colour(vehicle.getColour())
+                .price(vehicle.getPrice())
+                .yearV(vehicle.getYearV())
+                .build();
+    }
+
+    public VehicleResponse toVehicleResponse(Vehicle vehicle) {
+        return VehicleResponse.builder()
                 .brand(vehicle.getBrand())
                 .model(vehicle.getModel())
                 .colour(vehicle.getColour())

@@ -31,8 +31,10 @@ public class SellerMapper {
                 .build();
     }
 
-    public GetSellerByIdResponse toGetSellerByIdResponse(Seller seller) {
-        return GetSellerByIdResponse.builder()
+
+
+    public SellerResponse toSellerResponse(Seller seller) {
+        return SellerResponse.builder()
                 .firstName(seller.getFirstName())
                 .lastName(seller.getLastName())
                 .email(seller.getEmail())
@@ -82,9 +84,9 @@ public class SellerMapper {
     public SellersResponse toImportSellerResponse(List<Seller> sellers) {
         return SellersResponse.builder()
                 .sellers(sellers.stream().map(seller->{
-                    return toGetSellerByIdResponse(seller);
+                    return toSellerResponse(seller);
                 }).toList())
-                // .sellers(sellers.stream().map(this::toGetSellerByIdResponse).toList())
+                // .sellers(sellers.stream().map(this::toSellerResponse).toList())
                 .build();
     }
 }

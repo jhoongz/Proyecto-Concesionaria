@@ -1,6 +1,6 @@
 package com.example.Concesionaria.services;
 
-import com.example.Concesionaria.SellerRepository;
+import com.example.Concesionaria.repositories.SellerRepository;
 import com.example.Concesionaria.clients.RandomUserClient;
 import com.example.Concesionaria.dtos.responses.GetRandomUserResponse;
 import com.example.Concesionaria.models.Seller;

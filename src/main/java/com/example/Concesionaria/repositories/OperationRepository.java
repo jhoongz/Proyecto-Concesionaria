@@ -1,4 +1,4 @@
-package com.example.Concesionaria;
+package com.example.Concesionaria.repositories;
 
 import com.example.Concesionaria.models.Operation;
 import org.springframework.data.jpa.repository.JpaRepository;

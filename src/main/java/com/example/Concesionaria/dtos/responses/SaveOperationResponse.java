@@ -5,14 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GetVehicleByIdResponse {
-    private String brand;
-    private String model;
-    private String colour;
-    private Double price;
-    private Integer yearV;
+public class SaveOperationResponse {
+
+    private UUID id;
+
+    private SellerResponse sellersResponse;
+
+    private VehicleResponse vehicleResponse;
 }

@@ -5,12 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SellersResponse {
-    List<SellerResponse> sellers;
+public class VehicleResponse {
+    private String brand;
+    private String model;
+    private String colour;
+    private Double price;
+    private Integer yearV;
 }

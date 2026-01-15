@@ -11,11 +11,4 @@ public class NewOperationRequest {
 
     private Vehicle vehicle;
 
-    public Seller setSeller(Seller seller) {
-        return this.seller = seller;
-    }
-
-    public Vehicle setVehicle(Vehicle vehicle) {
-        return this.vehicle = vehicle;
-    }
 }

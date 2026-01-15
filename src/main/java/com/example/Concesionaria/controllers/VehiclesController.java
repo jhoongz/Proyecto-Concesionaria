@@ -3,7 +3,7 @@ package com.example.Concesionaria.controllers;
 import com.example.Concesionaria.dtos.requests.NewVehicleRequest;
 import com.example.Concesionaria.dtos.requests.PatchVehicleRequest;
 import com.example.Concesionaria.dtos.requests.UpdateVehicleRequest;
-import com.example.Concesionaria.dtos.responses.GetVehicleByIdResponse;
+import com.example.Concesionaria.dtos.responses.VehicleResponse;
 import com.example.Concesionaria.dtos.responses.PatchVehicleByIdResponse;
 import com.example.Concesionaria.dtos.responses.SaveVehicleResponse;
 import com.example.Concesionaria.dtos.responses.UpdateVehicleByIdResponse;
@@ -40,8 +40,8 @@ public class VehiclesController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GetVehicleByIdResponse> getVehicleById(@PathVariable Long id) {
-        return new ResponseEntity<>(vehicleMapper.toGetSellerByIdResponse(vehicleService.getVehicleById(id)), HttpStatus.OK);
+    public ResponseEntity<VehicleResponse> getVehicleById(@PathVariable Long id) {
+        return new ResponseEntity<>(vehicleMapper.toGetVehicleByIdResponse(vehicleService.getVehicleById(id)), HttpStatus.OK);
     }
 
     @PostMapping()

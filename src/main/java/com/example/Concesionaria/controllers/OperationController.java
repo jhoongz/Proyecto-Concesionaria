@@ -5,7 +5,10 @@ package com.example.Concesionaria.controllers;
 // ----------------------------------------
 
 
+import com.example.Concesionaria.dtos.OperationDto;
 import com.example.Concesionaria.dtos.requests.NewOperationRequest;
+import com.example.Concesionaria.dtos.responses.SaveOperationResponse;
+import com.example.Concesionaria.mappers.OperationMapper;
 import com.example.Concesionaria.models.Operation;
 import com.example.Concesionaria.services.OperationService;
 import jakarta.validation.Valid;
@@ -25,6 +28,9 @@ public class OperationController {
     @Autowired
     private OperationService operationService;
 
+    @Autowired
+    private OperationMapper operationMapper;
+
     @GetMapping()
     public ResponseEntity<List<Operation>> getAllOperations() {
         return new ResponseEntity<>(operationService.getAllOperations(), HttpStatus.OK);
@@ -36,8 +42,8 @@ public class OperationController {
     }
 
     @PostMapping()
-    public ResponseEntity<Operation> operationRegister(@Valid @RequestBody NewOperationRequest request) {
+    public ResponseEntity<SaveOperationResponse> operationRegister(@Valid @RequestBody NewOperationRequest request) {
         Operation newOperation = operationService.newOperationRegister(request);
-        return new ResponseEntity<>(newOperation, HttpStatus.CREATED);
+        return new ResponseEntity<>(operationMapper.toSaveOperationReponse(newOperation), HttpStatus.CREATED);
     }
 }

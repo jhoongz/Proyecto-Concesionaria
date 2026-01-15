@@ -1,6 +1,6 @@
 package com.example.Concesionaria.services;
 
-import com.example.Concesionaria.OperationRepository;
+import com.example.Concesionaria.repositories.OperationRepository;
 import com.example.Concesionaria.dtos.requests.NewOperationRequest;
 import com.example.Concesionaria.mappers.OperationMapper;
 import com.example.Concesionaria.models.Operation;
