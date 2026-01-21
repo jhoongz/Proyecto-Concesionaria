@@ -31,8 +31,6 @@ public class SellerMapper {
                 .build();
     }
 
-
-
     public SellerResponse toSellerResponse(Seller seller) {
         return SellerResponse.builder()
                 .firstName(seller.getFirstName())
@@ -41,7 +39,6 @@ public class SellerMapper {
                 .phone(seller.getPhone())
                 .build();
     }
-
 
     public UpdateSellerByIdResponse toUpdateSellerByIdResponse(Seller seller) {
 
@@ -52,7 +49,6 @@ public class SellerMapper {
                 .phone(seller.getPhone())
                 .build();
     }
-
 
     public void patchRequestToSeller(Seller seller, PatchSellerRequest request) {
         if (request.getFirstName() != null) {

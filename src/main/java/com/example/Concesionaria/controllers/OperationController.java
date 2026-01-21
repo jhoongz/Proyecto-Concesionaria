@@ -5,8 +5,9 @@ package com.example.Concesionaria.controllers;
 // ----------------------------------------
 
 
-import com.example.Concesionaria.dtos.OperationDto;
 import com.example.Concesionaria.dtos.requests.NewOperationRequest;
+import com.example.Concesionaria.dtos.responses.OperationResponse;
+import com.example.Concesionaria.dtos.responses.OperationResponseID;
 import com.example.Concesionaria.dtos.responses.SaveOperationResponse;
 import com.example.Concesionaria.mappers.OperationMapper;
 import com.example.Concesionaria.models.Operation;
@@ -32,18 +33,18 @@ public class OperationController {
     private OperationMapper operationMapper;
 
     @GetMapping()
-    public ResponseEntity<List<Operation>> getAllOperations() {
-        return new ResponseEntity<>(operationService.getAllOperations(), HttpStatus.OK);
+    public ResponseEntity<List<OperationResponse>> getAllOperations() {
+        return new ResponseEntity<>(operationMapper.toOperationResponseList(operationService.getAllOperations()), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Operation> getOperationById(@PathVariable UUID id) {
-        return new ResponseEntity<>(operationService.getOperationById(id), HttpStatus.OK);
+    public ResponseEntity<OperationResponseID> getOperationById(@PathVariable UUID id) {
+        return new ResponseEntity<>(operationMapper.toOperationResponseID(operationService.getOperationById(id)), HttpStatus.OK);
     }
 
     @PostMapping()
     public ResponseEntity<SaveOperationResponse> operationRegister(@Valid @RequestBody NewOperationRequest request) {
         Operation newOperation = operationService.newOperationRegister(request);
-        return new ResponseEntity<>(operationMapper.toSaveOperationReponse(newOperation), HttpStatus.CREATED);
+        return new ResponseEntity<>(operationMapper.toSaveOperationResponse(newOperation), HttpStatus.CREATED);
     }
 }
