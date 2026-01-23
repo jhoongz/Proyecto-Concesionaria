@@ -1,6 +1,6 @@
-package com.example.Concesionaria.models;
+package com.example.Concesionaria.dtos.responses;
 
-import jakarta.persistence.*;
+import com.example.Concesionaria.models.Operation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,12 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Builder
-
-public class Vehicle {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class SaveVehicleResponse {
     private Long id;
 
     private String brand;
@@ -23,6 +19,5 @@ public class Vehicle {
     private Double price;
     private Integer yearV;
 
-    @OneToOne(mappedBy = "vehicle")
     private Operation operations;
 }

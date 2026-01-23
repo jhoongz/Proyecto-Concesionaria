@@ -1,9 +1,9 @@
 package com.example.Concesionaria.services;
 
-import com.example.Concesionaria.VehicleRepository;
-import com.example.Concesionaria.controllers.requests.NewVehicleRequest;
-import com.example.Concesionaria.controllers.requests.PatchVehicleRequest;
-import com.example.Concesionaria.controllers.requests.UpdateVehicleRequest;
+import com.example.Concesionaria.repositories.VehicleRepository;
+import com.example.Concesionaria.dtos.requests.NewVehicleRequest;
+import com.example.Concesionaria.dtos.requests.PatchVehicleRequest;
+import com.example.Concesionaria.dtos.requests.UpdateVehicleRequest;
 import com.example.Concesionaria.models.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VehiclesService {
+public class VehicleService {
 
     @Autowired
     private VehicleRepository vehicleRepository;

@@ -1,6 +1,6 @@
 package com.example.Concesionaria.clients;
 
-import com.example.Concesionaria.dtos.GetRandomUserResponse;
+import com.example.Concesionaria.dtos.responses.GetRandomUserResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
