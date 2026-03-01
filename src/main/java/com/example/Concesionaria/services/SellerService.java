@@ -1,11 +1,12 @@
 package com.example.Concesionaria.services;
 
-import com.example.Concesionaria.SellerRepository;
+import com.example.Concesionaria.repositories.SellerRepository;
 import com.example.Concesionaria.clients.RandomUserClient;
-import com.example.Concesionaria.controllers.requests.PatchSellerRequest;
-import com.example.Concesionaria.controllers.requests.NewSellerRequest;
-import com.example.Concesionaria.controllers.requests.UpdateSellerRequest;
-import com.example.Concesionaria.dtos.GetRandomUserResponse;
+import com.example.Concesionaria.dtos.requests.PatchSellerRequest;
+import com.example.Concesionaria.dtos.requests.NewSellerRequest;
+import com.example.Concesionaria.dtos.requests.UpdateSellerRequest;
+import com.example.Concesionaria.dtos.responses.GetRandomUserResponse;
+import com.example.Concesionaria.mappers.SellerMapper;
 import com.example.Concesionaria.models.Seller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class SellerService {
     @Autowired
     private RandomUserClient randomUserClient;
 
+    @Autowired
+    private SellerMapper sellerMapper;
+
     public List<Seller> getAllSellers() {
         return sellerRepository.findAll();
     }
@@ -31,43 +35,20 @@ public class SellerService {
     }
 
     public Seller addNewSeller(NewSellerRequest request) {
-
-        Seller newSeller = Seller.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .email(request.getEmail())
-                .phone(request.getPhone())
-                .build();
+        Seller newSeller = sellerMapper.toSeller(request);
         newSeller = sellerRepository.save(newSeller);
-        System.out.println("New Seller: " + newSeller.getId());
-
         return newSeller;
     }
 
     public Seller updateSellerById(Long id, UpdateSellerRequest request) {
-        Seller updateSeller = sellerRepository.findById(id).get();
-        updateSeller.setFirstName(request.getFirstName());
-        updateSeller.setLastName(request.getLastName());
-        updateSeller.setEmail(request.getEmail());
-        updateSeller.setPhone(request.getPhone());
-        return sellerRepository.save(updateSeller);
+        Seller seller = sellerRepository.findById(id).get();
+        return sellerRepository.save(seller);
     }
 
     public Seller patchSellerById(Long id, PatchSellerRequest request) {
-        Seller fixSeller = sellerRepository.findById(id).get();
-        if (request.getFirstName() != null) {
-            fixSeller.setFirstName(request.getFirstName());
-        }
-        if (request.getLastName() != null) {
-            fixSeller.setLastName(request.getLastName());
-        }
-        if (request.getEmail() != null) {
-            fixSeller.setEmail(request.getEmail());
-        }
-        if (request.getPhone() != null) {
-            fixSeller.setPhone(request.getPhone());
-        }
-        return sellerRepository.save(fixSeller);
+        Seller seller = sellerRepository.findById(id).get();
+        sellerMapper.patchRequestToSeller(seller, request);
+        return sellerRepository.save(seller);
     }
 
     public List<Seller> deleteAllSellers() {

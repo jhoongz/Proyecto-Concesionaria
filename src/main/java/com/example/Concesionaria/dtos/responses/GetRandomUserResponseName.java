@@ -1,4 +1,4 @@
-package com.example.Concesionaria.dtos;
+package com.example.Concesionaria.dtos.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

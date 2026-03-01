@@ -1,5 +1,8 @@
 package com.example.Concesionaria.dtos;
 
+import com.example.Concesionaria.dtos.responses.GetRandomUserResponseEmail;
+import com.example.Concesionaria.dtos.responses.GetRandomUserResponseName;
+import com.example.Concesionaria.dtos.responses.GetRandomUserResponsePhone;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

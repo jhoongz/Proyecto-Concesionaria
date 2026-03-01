@@ -1,6 +1,6 @@
-package com.example.Concesionaria.controllers.requests;
+package com.example.Concesionaria.dtos.requests;
 
-import jakarta.persistence.Id;
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -13,11 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class UpdateVehicleRequest {
-    @Id
-    @NotNull
-    @NotBlank
-    private Long id;
+public class NewVehicleRequest {
 
     @NotNull
     @NotBlank
